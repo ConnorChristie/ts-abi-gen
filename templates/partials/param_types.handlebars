@@ -1,0 +1,6 @@
+{{#each inputs}}
+{{#if @first}}
+
+{{/if}}
+    {{name}}: {{#parameterType type components}}{{/parameterType}}{{#unless @last}},{{/unless}}
+{{/each}}

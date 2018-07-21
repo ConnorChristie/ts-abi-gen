@@ -1,0 +1,7 @@
+public {{name}}Tx({{> param_types inputs=inputs}}): DeferredTransactionWrapper<{{#payable}}IPayableTxParams{{/payable}}{{^payable}}ITxParams{{/payable}}> {
+    return new DeferredTransactionWrapper<{{#payable}}IPayableTxParams{{/payable}}{{^payable}}ITxParams{{/payable}}>(this, '{{name}}', [
+        {{#each inputs}}
+        {{name}}.toString(){{#unless @last}},{{/unless}}
+        {{/each}}
+    ]);
+}

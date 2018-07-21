@@ -1,0 +1,43 @@
+{
+  "name": "ts-abi-gen",
+  "version": "1.0.0",
+  "description": "Typescript ABI generator",
+  "main": "index.js",
+  "scripts": {
+    "watch": "tsc -w",
+    "lint": "tslint --project .",
+    "build": "tsc",
+    "test": "node dist/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ConnorChristie/ts-abi-gen.git"
+  },
+  "author": "Connor Christie",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ConnorChristie/ts-abi-gen/issues"
+  },
+  "homepage": "https://github.com/ConnorChristie/ts-abi-gen#readme",
+  "dependencies": {
+    "@0xproject/types": "^0.8.2",
+    "@0xproject/utils": "^1.0.0",
+    "glob": "^7.1.2",
+    "handlebars": "^4.0.11",
+    "lodash": "^4.17.10",
+    "mkdirp": "^0.5.1"
+  },
+  "devDependencies": {
+    "@types/glob": "^5.0.35",
+    "@types/handlebars": "^4.0.38",
+    "@types/lodash": "^4.14.112",
+    "@types/mkdirp": "^0.5.2",
+    "typescript": "^2.9.2"
+  },
+  "peerDependencies": {
+    "@colony/colony-js-adapter": "^1.5.4",
+    "@colony/colony-js-adapter-ethers": "^1.5.4",
+    "@colony/colony-js-contract-client": "^1.5.4",
+    "bignumber.js": "^7.2.1"
+  }
+}

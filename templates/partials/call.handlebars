@@ -1,0 +1,13 @@
+{{#if inputs.length}}
+public {{name}}({{> param_types inputs=inputs}}): Promise<{{> return_type outputs=outputs}}> {
+    return promisify(this.rawWeb3Contract.{{name}}, [
+        {{#each inputs}}
+        {{name}}.toString(){{#unless @last}},{{/unless}}
+        {{/each}}
+    ]);
+}
+{{else}}
+public get {{name}}(): Promise<{{> return_type outputs=outputs}}> {
+    return promisify(this.rawWeb3Contract.{{name}}, []);
+}
+{{/if}}
