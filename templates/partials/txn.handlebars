@@ -1,7 +1,7 @@
-public {{name}}Tx({{> param_types inputs=inputs}}): DeferredTransactionWrapper<{{#payable}}IPayableTxParams{{/payable}}{{^payable}}Tx{{/payable}}> {
-  return new DeferredTransactionWrapper<{{#payable}}IPayableTxParams{{/payable}}{{^payable}}Tx{{/payable}}>(this, '{{name}}', [
+public {{name}}Tx({{> param_types inputs=inputs}}): TransactionObject<TypedTransactionReceipt> {
+  return this.web3Contract.methods.{{name}}(
     {{#each inputs}}
-    {{name}}{{#unless @last}},{{/unless}}
+    {{name}}.toString(){{#unless @last}},{{/unless}}
     {{/each}}
-  ]);
+  );
 }

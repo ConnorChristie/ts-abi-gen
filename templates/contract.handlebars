@@ -1,56 +1,26 @@
 /* tslint:disable */
 import Web3 from 'web3';
 import { BigNumber } from 'bignumber.js';
-import { Contract, Tx } from 'web3/types';
+import { Contract, TransactionReceipt, TransactionObject, EventLog } from 'web3/types';
 
-export interface IPayableTxParams extends Tx {
-  value: string | number;
+{{#each events}}
+{{> event}}
+
+{{/each}}
+declare interface TypedTransactionReceipt extends TransactionReceipt {
+  events?: {
+    {{#each events}}
+    {{name}}?: { returnValues: {{name}}Event } & EventLog;
+    {{/each}}
+  };
 }
 
-export class TypeChainContract {
+export class {{contractName}} {
   public readonly web3Contract: Contract;
-  public readonly address: string;
 
-  constructor(
-    web3: Web3,
-    address: string,
-    public readonly contractAbi: any[]
-  ) {
-    this.address = address.toString();
-    this.web3Contract = new web3.eth.Contract(contractAbi, address);
-  }
-}
-
-export class DeferredTransactionWrapper<T extends Tx> {
-  constructor(
-    private readonly parentContract: TypeChainContract,
-    private readonly methodName: string,
-    private readonly methodArgs: any[]
-  ) { }
-
-  send(params: T, customWeb3?: Web3) {
-    return this.getMethod(customWeb3).send(params);
-  }
-
-  estimateGas() {
-    return this.getMethod().estimateGas();
-  }
-
-  private getMethod(customWeb3?: Web3) {
-    let contract = this.parentContract.web3Contract;
-
-    if (customWeb3) {
-      contract = new customWeb3.eth.Contract(this.parentContract.contractAbi, this.parentContract.address);
-    }
-
-    return contract.methods[this.methodName](...this.methodArgs);
-  }
-}
-
-export class {{contractName}} extends TypeChainContract {
-  public constructor(adapter, address: string) {
+  public constructor(web3: Web3, address: string) {
     const abi = {{{abi}}};
-    super(adapter, address, abi);
+    this.web3Contract = new web3.eth.Contract(abi, address);
   }
 
   {{#each methods}}

@@ -1,0 +1,5 @@
+export interface {{name}}Event {
+  {{#each inputs}}
+  {{name}}: {{#returnType type components}}{{/returnType}};
+  {{/each}}
+}

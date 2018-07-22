@@ -2,7 +2,7 @@
 public {{name}}({{> param_types inputs=inputs}}): Promise<{{> return_type outputs=outputs}}> {
   return this.web3Contract.methods.{{name}}(
     {{#each inputs}}
-    {{name}}{{#unless @last}},{{/unless}}
+    {{name}}.toString(){{#unless @last}},{{/unless}}
     {{/each}}
   ).call();
 }

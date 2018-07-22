@@ -63,17 +63,9 @@ export function solTypeToTsType(paramKind: ParamKind, backend: ContractsBackend)
                 { regex: '^string$', tsType: 'string' },
                 { regex: '^address$', tsType: 'string' },
                 { regex: '^bool$', tsType: 'boolean' },
-                { regex: '^u?int\\d*$', tsType: 'BigNumber' },
+                { regex: '^u?int\\d*$', tsType: 'BigNumber | number' },
                 { regex: '^bytes\\d*$', tsType: 'string' },
             ];
-
-            if (paramKind === ParamKind.Input) {
-                // web3 and ethers allow to pass those as numbers instead of bignumbers
-                solTypeRegexToTsType.unshift({
-                    regex: '^u?int(8|16|32)?$',
-                    tsType: 'BigNumber | number',
-                });
-            }
 
             if (backend === ContractsBackend.Ethers && paramKind === ParamKind.Output) {
                 // ethers-contracts automatically converts small BigNumbers to numbers
