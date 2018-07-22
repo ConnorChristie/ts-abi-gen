@@ -35,9 +35,7 @@
     "typescript": "^2.9.2"
   },
   "peerDependencies": {
-    "@colony/colony-js-adapter": "^1.5.4",
-    "@colony/colony-js-adapter-ethers": "^1.5.4",
-    "@colony/colony-js-contract-client": "^1.5.4",
-    "bignumber.js": "^7.2.1"
+    "bignumber.js": "^7.2.1",
+    "web3": "^1.0.0-beta.34"
   }
 }

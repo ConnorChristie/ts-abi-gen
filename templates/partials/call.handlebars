@@ -1,13 +1,13 @@
 {{#if inputs.length}}
 public {{name}}({{> param_types inputs=inputs}}): Promise<{{> return_type outputs=outputs}}> {
-    return promisify(this.rawWeb3Contract.{{name}}, [
-        {{#each inputs}}
-        {{name}}.toString(){{#unless @last}},{{/unless}}
-        {{/each}}
-    ]);
+  return this.web3Contract.methods.{{name}}(
+    {{#each inputs}}
+    {{name}}{{#unless @last}},{{/unless}}
+    {{/each}}
+  ).call();
 }
 {{else}}
 public get {{name}}(): Promise<{{> return_type outputs=outputs}}> {
-    return promisify(this.rawWeb3Contract.{{name}}, []);
+  return this.web3Contract.methods.{{name}}().call();
 }
 {{/if}}
